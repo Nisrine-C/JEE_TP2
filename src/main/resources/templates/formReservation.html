@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webjars/bootstrap-icons/1.11.3/font/bootstrap-icons.css">
+    <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <title>Formulaire Reservation</title>
+</head>
+<body>
+<div layout:fragment="content1">
+    <div class="container col-md-6">
+        <form method="post" th:action="@{/saveReservation}" th:object="${reservation}">
+
+            <!-- Date Reservation -->
+            <div class="mb-3">
+                <label for="dateReservation" class="form-label">Date de Réservation</label>
+                <input type="datetime-local" class="form-control" id="dateReservation" name="dateReservation" th:field="*{dateReservation}">
+                <span class="text-danger" th:errors="*{dateReservation}"></span>
+            </div>
+
+            <!-- Type Reservation -->
+            <div class="mb-3">
+                <label for="typeReservation" class="form-label">Type de Réservation</label>
+                <select class="form-control" id="typeReservation" name="typeReservation" th:field="*{typeReservation}">
+                    <option th:each="type : ${T(ma.enset.jee_tp2.entities.TypeReservation).values()}"
+                            th:value="${type}"
+                            th:text="#{type}">Option</option>
+                </select>
+                <span class="text-danger" th:errors="*{typeReservation}"></span>
+            </div>
+
+            <!-- Durée Reservation -->
+            <div class="mb-3">
+                <label for="dureeReservation" class="form-label">Durée de Réservation (en heures)</label>
+                <input type="number" class="form-control" id="dureeReservation" name="dureeReservation" th:field="*{dureeReservation}">
+                <span class="text-danger" th:errors="*{dureeReservation}"></span>
+            </div>
+
+            <!-- Coût Reservation -->
+            <div class="mb-3">
+                <label for="coutReservation" class="form-label">Coût de Réservation</label>
+                <input type="number" class="form-control" id="coutReservation" name="coutReservation" th:field="*{coutReservation}">
+                <span class="text-danger" th:errors="*{coutReservation}"></span>
+            </div>
+
+            <!-- Etat Reservation -->
+            <div class="mb-3">
+                <label for="etatReservation" class="form-label">Etat de Réservation</label>
+                <select class="form-control" id="etatReservation" name="etatReservation" th:field="*{etatReservation}">
+                    <option th:each="etat : ${T(ma.enset.jee_tp2.entities.EtatReservation).values()}"
+                            th:value="${etat}"
+                            th:text="${etat.valueOf()}">Option</option>
+                </select>
+                <span class="text-danger" th:errors="*{etatReservation}"></span>
+            </div>
+
+            <!-- Entreprise -->
+            <input type="hidden" name="id" th:field="*{id}"/>
+
+            <button type="submit" class="btn btn-primary">Soumettre</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

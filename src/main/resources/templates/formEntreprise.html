@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webjars/bootstrap-icons/1.11.3/font/bootstrap-icons.css">
+    <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <title>Formulaire Entreprise</title>
+</head>
+<body>
+<div layout:fragment="content1">
+    <div class="container col-md-6">
+        <form method="post" th:action="@{/save}" th:object="${entreprise}">
+            <div class="mb-3">
+                <label for="nom" class="form-label">Nom de l'Entreprise</label>
+                <input type="text" class="form-control" id="nom" name="nom" th:field="*{nom}">
+                <span class="text-danger" th:errors="*{nom}"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Adresse Email</label>
+                <input type="email" class="form-control" id="email" name="email" th:field="*{email}">
+                <span class="text-danger" th:errors="*{email}"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="domaineActivite" class="form-label">Domaine d'Activité</label>
+                <input type="text" class="form-control" id="domaineActivite" name="domaineActivite" th:field="*{domaineActivite}">
+                <span class="text-danger" th:errors="*{domaineActivite}"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="username" class="form-label">Nom d'utilisateur</label>
+                <input type="text" class="form-control" id="username" name="username" th:field="*{username}">
+                <span class="text-danger" th:errors="*{username}"></span>
+            </div>
+
+            <input type="hidden" name="id" th:field="*{id}"/>
+
+            <button type="submit" class="btn btn-primary">Soumettre</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
